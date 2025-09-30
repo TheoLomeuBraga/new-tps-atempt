@@ -1,0 +1,289 @@
+[gd_scene load_steps=27 format=3 uid="uid://bu0u51ro1uyfx"]
+
+[ext_resource type="PackedScene" uid="uid://bxf8n1b2ueysd" path="res://player/demo_model.glb" id="1_70xuj"]
+[ext_resource type="Script" uid="uid://diyqimhy3dysq" path="res://player/player_model.gd" id="2_4xcvv"]
+[ext_resource type="AnimationLibrary" uid="uid://cffe0vkm2f8gi" path="res://player/template_psx_charter.glb" id="2_65fbn"]
+[ext_resource type="Script" uid="uid://biw1br0nob8u0" path="res://player/bone_rotater.gd" id="3_nis8b"]
+
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_4xcvv"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mstlb"]
+animation = &"template_psx_charter/charge_shot_arms_only"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ugfh7"]
+animation = &"template_psx_charter/automatic_shot_arms_only"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4xcvv"]
+animation = &"template_psx_charter/jump_legs_only"
+use_custom_timeline = true
+timeline_length = 1.0
+stretch_time_scale = true
+start_offset = 1.0
+loop_mode = 0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ldqqv"]
+animation = &"template_psx_charter/jump_arms_only"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_b6qoi"]
+animation = &"template_psx_charter/charge_shot_arms_only"
+use_custom_timeline = true
+timeline_length = 1.0
+stretch_time_scale = true
+start_offset = 1.0
+loop_mode = 0
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_ldqqv"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_oldwj"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_uex76"]
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_y220p"]
+xfade_time = 0.1
+input_0/name = "normal"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "gun"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+input_2/name = "air"
+input_2/auto_advance = false
+input_2/break_loop_at_end = false
+input_2/reset = true
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_yq1x2"]
+fadein_time = 0.1
+fadeout_time = 0.1
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_ivyc5"]
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_oldwj"]
+xfade_time = 0.1
+input_0/name = "floor"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "air"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_30u10"]
+animation = &"template_psx_charter/idle_arms_only"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2pfil"]
+animation = &"template_psx_charter/run_arms_only"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2cwkw"]
+animation = &"template_psx_charter/walk_arms_only"
+play_mode = 1
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_3ybyl"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_30u10")
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_2pfil")
+blend_point_1/pos = 1.0
+blend_point_2/node = SubResource("AnimationNodeAnimation_2cwkw")
+blend_point_2/pos = -1.0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2jlbv"]
+animation = &"template_psx_charter/idle_legs_only"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qq571"]
+animation = &"template_psx_charter/run_legs_only"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qvp1s"]
+animation = &"template_psx_charter/walk_legs_only"
+play_mode = 1
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_3gapg"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_2jlbv")
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_qq571")
+blend_point_1/pos = 1.0
+blend_point_2/node = SubResource("AnimationNodeAnimation_qvp1s")
+blend_point_2/pos = -1.0
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_nis8b"]
+graph_offset = Vector2(-1178.2972, 47.060806)
+nodes/output/position = Vector2(1040, 420)
+nodes/Add2/node = SubResource("AnimationNodeAdd2_4xcvv")
+nodes/Add2/position = Vector2(320, 420)
+nodes/walk_arms/node = SubResource("AnimationNodeBlendSpace1D_3ybyl")
+nodes/walk_arms/position = Vector2(-840, 80)
+nodes/walk_legs/node = SubResource("AnimationNodeBlendSpace1D_3gapg")
+nodes/walk_legs/position = Vector2(-360, 640)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_uex76")
+nodes/TimeScale/position = Vector2(-660, 80)
+"nodes/TimeScale 2/node" = SubResource("AnimationNodeTimeScale_ldqqv")
+"nodes/TimeScale 2/position" = Vector2(-180, 640)
+nodes/arm_estate/node = SubResource("AnimationNodeTransition_y220p")
+nodes/arm_estate/position = Vector2(-253.19652, 273.07245)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_b6qoi")
+nodes/Animation/position = Vector2(-1740, 140)
+nodes/charged_shot/node = SubResource("AnimationNodeOneShot_ivyc5")
+nodes/charged_shot/position = Vector2(-1320, 200)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_mstlb")
+"nodes/Animation 2/position" = Vector2(-1740, 320)
+nodes/automatic_shot/node = SubResource("AnimationNodeOneShot_yq1x2")
+nodes/automatic_shot/position = Vector2(-1060, 300)
+"nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_ugfh7")
+"nodes/Animation 3/position" = Vector2(-1780, 580)
+"nodes/TimeScale 3/node" = SubResource("AnimationNodeTimeScale_oldwj")
+"nodes/TimeScale 3/position" = Vector2(-1320, 540)
+nodes/leg_estate/node = SubResource("AnimationNodeTransition_oldwj")
+nodes/leg_estate/position = Vector2(100, 740)
+"nodes/Animation 4/node" = SubResource("AnimationNodeAnimation_4xcvv")
+"nodes/Animation 4/position" = Vector2(-480, 880)
+"nodes/Animation 5/node" = SubResource("AnimationNodeAnimation_ldqqv")
+"nodes/Animation 5/position" = Vector2(-680, 460)
+node_connections = [&"output", 0, &"Add2", &"Add2", 0, &"arm_estate", &"Add2", 1, &"leg_estate", &"TimeScale", 0, &"walk_arms", &"TimeScale 2", 0, &"walk_legs", &"arm_estate", 0, &"TimeScale", &"arm_estate", 1, &"automatic_shot", &"arm_estate", 2, &"Animation 5", &"charged_shot", 0, &"Animation", &"charged_shot", 1, &"Animation 2", &"automatic_shot", 0, &"charged_shot", &"automatic_shot", 1, &"TimeScale 3", &"TimeScale 3", 0, &"Animation 3", &"leg_estate", 0, &"TimeScale 2", &"leg_estate", 1, &"Animation 4"]
+
+[node name="player_model" instance=ExtResource("1_70xuj")]
+script = ExtResource("2_4xcvv")
+
+[node name="GeneralSkeleton" parent="metarig" index="0"]
+bones/0/position = Vector3(0, 0.9048559, -0.057564765)
+bones/0/rotation = Quaternion(0.0016865756, 0, 0, 0.99999857)
+bones/4/rotation = Quaternion(-3.3527613e-08, 0, 0, 1)
+bones/5/rotation = Quaternion(-2.9802322e-08, 0, 0, 1)
+bones/6/rotation = Quaternion(-7.450568e-09, -1.1920926e-07, -4.4408942e-15, 1)
+bones/8/rotation = Quaternion(-0.25497946, 0.7657829, -0.58944386, -0.033435915)
+bones/9/rotation = Quaternion(0.36611214, -0.644509, 0.23464076, 0.6288988)
+bones/10/rotation = Quaternion(2.095701e-08, 0.70710677, -2.1189841e-08, 0.70710677)
+bones/12/rotation = Quaternion(-0.47392592, 0.57833546, -0.51760674, -0.41593957)
+bones/13/rotation = Quaternion(0.016198853, 0.70732117, -0.010381879, 0.7066306)
+bones/14/rotation = Quaternion(4.6566118e-10, -0.70710677, -4.6566118e-10, 0.70710677)
+bones/19/rotation = Quaternion(4.936187e-08, 0.0023294825, 0.9999973, -6.902052e-09)
+bones/20/rotation = Quaternion(-3.4971505e-16, 0.99999416, -0.0034411843, 2.0830546e-15)
+bones/21/rotation = Quaternion(1.5477922e-15, 0.70710677, -0.70710677, 6.99006e-16)
+bones/24/rotation = Quaternion(3.8343188e-08, 0.0023294825, 0.9999973, 6.424765e-09)
+bones/25/rotation = Quaternion(-1.0553206e-16, 0.99999416, -0.0034411843, 2.1340345e-15)
+bones/26/rotation = Quaternion(-4.0775158e-16, 0.70710677, -0.70710677, -2.0803727e-16)
+
+[node name="spine_006" parent="metarig/GeneralSkeleton" index="0"]
+transform = Transform3D(1, 1.0658138e-14, -2.3841847e-07, -8.041975e-10, 0.999994, -0.003373004, 2.3841717e-07, 0.0033730036, 0.9999941, 1.9339312e-15, 1.5989097, 0.00470163)
+
+[node name="spine_004" parent="metarig/GeneralSkeleton" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.99999434, -0.0033730792, 0, 0.0033730792, 0.99999434, 2.8575724e-15, 1.4882118, -0.02274688)
+
+[node name="hand_L" parent="metarig/GeneralSkeleton" index="2"]
+transform = Transform3D(-0.18165554, 0.23281443, -0.955405, -0.4780593, -0.86994034, -0.121092774, -0.8593374, 0.4347431, 0.2693286, 0.20979494, 1.0964491, -0.053839847)
+
+[node name="forearm_L" parent="metarig/GeneralSkeleton" index="3"]
+transform = Transform3D(-0.955405, 0.23281449, 0.18165554, -0.121092826, -0.86994034, 0.4780593, 0.26932862, 0.43474308, 0.8593374, 0.17233354, 1.2532951, -0.16747585)
+
+[node name="upper_arm_L" parent="metarig/GeneralSkeleton" index="4"]
+transform = Transform3D(-0.35110065, 0.1750828, -0.919823, 0.35472646, -0.8842659, -0.30371547, -0.8665435, -0.43292022, 0.2483598, 0.14647499, 1.4220108, -0.03444523)
+
+[node name="hand_R" parent="metarig/GeneralSkeleton" index="5"]
+transform = Transform3D(0.1169458, -0.0023753045, 0.9931356, 0.97827786, -0.1720689, -0.11560777, 0.17116234, 0.98508215, -0.017798956, -0.1439317, 1.3275226, 0.35910803)
+
+[node name="forearm_R" parent="metarig/GeneralSkeleton" index="6"]
+transform = Transform3D(-0.9931356, -0.0023753047, 0.1169458, 0.11560777, -0.1720689, 0.97827786, 0.017798956, 0.98508215, 0.17116234, -0.16062926, 1.3337636, 0.16264077)
+
+[node name="upper_arm_R" parent="metarig/GeneralSkeleton" index="7"]
+transform = Transform3D(0.11759013, -0.014955044, 0.9929496, 0.9710233, -0.20775203, -0.118122496, 0.20805383, 0.9780673, -0.009907826, -0.14647499, 1.4220108, -0.03444523)
+
+[node name="spine_002" parent="metarig/GeneralSkeleton" index="8"]
+transform = Transform3D(1, 0, 0, 0, 0.99999434, -0.0033731463, 0, 0.0033731463, 0.99999434, -5.2038528e-18, 1.1594157, -0.01560589)
+
+[node name="spine_001" parent="metarig/GeneralSkeleton" index="9"]
+transform = Transform3D(1, 0, 0, 0, 0.99999434, -0.0033731463, 0, 0.0033731463, 0.99999434, 0, 1.037419, -0.02861746)
+
+[node name="foot_L" parent="metarig/GeneralSkeleton" index="10"]
+transform = Transform3D(-0.9999999, 9.878556e-08, -1.3354484e-08, -1.39071314e-08, -0.005596536, 0.99998426, 9.870928e-08, 0.99998444, 0.0055965367, 0.07350001, 0.07275146, -0.029783867)
+
+[node name="shin_L" parent="metarig/GeneralSkeleton" index="11"]
+transform = Transform3D(0.9999999, 1.3354483e-08, -9.878556e-08, 1.3907131e-08, -0.99998426, 0.005596536, -9.870928e-08, -0.0055965367, -0.99998444, 0.07350001, 0.47935703, 0.0060923584)
+
+[node name="thigh_L" parent="metarig/GeneralSkeleton" index="12"]
+transform = Transform3D(-0.9999999, 1.403404e-08, 9.86913e-08, -1.390713e-08, -0.9999991, 0.0012858156, 9.870927e-08, 0.0012858161, 0.9999992, 0.0735, 0.9606373, -0.025276437)
+
+[node name="foot_R" parent="metarig/GeneralSkeleton" index="13"]
+transform = Transform3D(-0.9999999, 7.662709e-08, 1.319854e-08, 1.2769487e-08, -0.005596536, 0.99998426, 7.669975e-08, 0.99998444, 0.0055965367, -0.0735, 0.07275146, -0.029783867)
+
+[node name="shin_R" parent="metarig/GeneralSkeleton" index="14"]
+transform = Transform3D(0.9999999, -1.319854e-08, -7.662709e-08, -1.2769487e-08, -0.99998426, 0.005596536, -7.669975e-08, -0.0055965367, -0.99998444, -0.0735, 0.47935703, 0.0060923584)
+
+[node name="thigh_R" parent="metarig/GeneralSkeleton" index="15"]
+transform = Transform3D(-0.9999999, -1.2670855e-08, 7.67161e-08, 1.2769487e-08, -0.9999991, 0.0012858156, 7.669974e-08, 0.0012858161, 0.9999992, -0.0735, 0.9606373, -0.025276437)
+
+[node name="spine" parent="metarig/GeneralSkeleton" index="16"]
+transform = Transform3D(1, 0, 0, 0, 0.99999434, -0.0033731463, 0, 0.0033731463, 0.99999434, 0, 0.9048559, -0.057564765)
+
+[node name="waist" type="SkeletonModifier3D" parent="metarig/GeneralSkeleton" index="17"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+rotation_edit_mode = 0
+rotation_order = 2
+top_level = false
+visible = true
+visibility_parent = NodePath("")
+active = true
+influence = 1.0
+script = ExtResource("3_nis8b")
+target_bone = "Spine"
+metadata/_custom_type_script = "uid://biw1br0nob8u0"
+
+[node name="arm" type="SkeletonModifier3D" parent="metarig/GeneralSkeleton" index="18"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+rotation_edit_mode = 0
+rotation_order = 2
+top_level = false
+visible = true
+visibility_parent = NodePath("")
+active = true
+influence = 1.0
+script = ExtResource("3_nis8b")
+target_bone = "RightUpperArm"
+target_rotation_pivo = Vector3(0, 0, 1)
+metadata/_custom_type_script = "uid://biw1br0nob8u0"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="metarig/GeneralSkeleton" index="19"]
+root_node = NodePath("../../..")
+libraries = {
+&"template_psx_charter": ExtResource("2_65fbn")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="metarig/GeneralSkeleton" index="20"]
+root_node = NodePath("%GeneralSkeleton/../..")
+tree_root = SubResource("AnimationNodeBlendTree_nis8b")
+anim_player = NodePath("../AnimationPlayer")
+parameters/Add2/add_amount = 1.0
+parameters/walk_arms/blend_position = 0.0
+parameters/walk_legs/blend_position = 0.0
+parameters/TimeScale/scale = 4.0
+"parameters/TimeScale 2/scale" = 4.0
+parameters/arm_estate/current_state = "gun"
+parameters/arm_estate/transition_request = ""
+parameters/arm_estate/current_index = 1
+parameters/charged_shot/active = false
+parameters/charged_shot/internal_active = false
+parameters/charged_shot/request = 0
+parameters/automatic_shot/active = false
+parameters/automatic_shot/internal_active = false
+parameters/automatic_shot/request = 0
+"parameters/TimeScale 3/scale" = 2.0
+parameters/leg_estate/current_state = "floor"
+parameters/leg_estate/transition_request = ""
+parameters/leg_estate/current_index = 0

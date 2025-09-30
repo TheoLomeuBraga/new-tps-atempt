@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://k00yxbe3ljsl"]
+
+[ext_resource type="Texture2D" uid="uid://bjacdiun0rvpd" path="res://test_area/grass.png" id="1_8fn5d"]
+[ext_resource type="Texture2D" uid="uid://tjt06svhrmvw" path="res://test_area/brick wall.png" id="2_5fqut"]
+[ext_resource type="PackedScene" uid="uid://d4hsleu8e18nt" path="res://player/Player.tscn" id="3_73vc8"]
+
+[sub_resource type="Environment" id="Environment_6vvil"]
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pefle"]
+albedo_texture = ExtResource("1_8fn5d")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0gq0q"]
+albedo_texture = ExtResource("2_5fqut")
+uv1_triplanar = true
+texture_filter = 0
+
+[node name="TestArea" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_6vvil")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.23138428, 0)
+size = Vector3(100, 0.537, 100)
+material = SubResource("StandardMaterial3D_pefle")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, -8)
+size = Vector3(5, 3, 1)
+material = SubResource("StandardMaterial3D_0gq0q")
+
+[node name="Player" parent="." instance=ExtResource("3_73vc8")]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 1.1204739, 0)
