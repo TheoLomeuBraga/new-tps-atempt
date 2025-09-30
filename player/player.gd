@@ -58,6 +58,8 @@ func air_process(delta: float) -> void:
 var shot_recently : float = 0.0
 var input_dir_on_jump : Vector2 = Vector2.ZERO
 
+const charter_rotation_speed : float = 10.0
+
 func animation_process(delta: float) -> void:
 	
 	var input_dir : Vector2 = Input.get_vector("left", "right", "foward", "back")
@@ -82,10 +84,16 @@ func animation_process(delta: float) -> void:
 			#rotate
 			
 			if input_dir.length() > 0.0:
-				player_model_rotation_basis.look_at(player_model_rotation_basis.global_position + Vector3(input_dir.x,0.0,input_dir.y))
+				player_model_rotation_basis.look_at(player_model_rotation_basis.global_position + (Vector3(input_dir.x,0.0,input_dir.y) - (camera_suport.basis.z * 0.2)))
 				player_model_rotation_basis.rotation.y += camera_suport.rotation.y + PI
-				player_model.rotation.y = rotate_toward(player_model.rotation.y,player_model_rotation_basis.rotation.y,10.0 * delta)
-				player_model.rotation.y = max(player_model.rotation.y-(PI/2.0),min(player_model.rotation.y+(PI/2.0),player_model.rotation.y))
+				
+				player_model.rotation.y = rotate_toward(player_model.rotation.y,player_model_rotation_basis.rotation.y,charter_rotation_speed * delta)
+				
+				if player_model.rotation.y < player_model.rotation.y-(PI/2.0):
+					player_model.rotation.y = - player_model.rotation.y
+				
+				if player_model.rotation.y > player_model.rotation.y+(PI/2.0): 
+					player_model.rotation.y = - player_model.rotation.y
 				
 				
 				player_model_rotation_basis.look_at(player_model_rotation_basis.global_position + camera_suport.transform.basis.z)
@@ -96,10 +104,10 @@ func animation_process(delta: float) -> void:
 			else:
 				
 				player_model_rotation_basis.look_at(player_model_rotation_basis.global_position + camera_suport.basis.z)
-				player_model.rotation.y = rotate_toward(player_model.rotation.y,player_model_rotation_basis.rotation.y,10.0 * delta)
+				player_model.rotation.y = rotate_toward(player_model.rotation.y,player_model_rotation_basis.rotation.y,charter_rotation_speed * delta)
 				
 				
-				player_model.waist_rotation = rotate_toward(player_model.waist_rotation,0.0,10.0 * delta)
+				player_model.waist_rotation = rotate_toward(player_model.waist_rotation,0.0,charter_rotation_speed * delta)
 				
 			
 			
@@ -116,9 +124,9 @@ func animation_process(delta: float) -> void:
 			if input_dir.length() > 0.0:
 				player_model_rotation_basis.look_at(player_model_rotation_basis.global_position + Vector3(input_dir.x,0.0,input_dir.y))
 				player_model_rotation_basis.rotation.y += camera_suport.rotation.y + PI
-				player_model.rotation.y = rotate_toward(player_model.rotation.y,player_model_rotation_basis.rotation.y,10.0 * delta)
+				player_model.rotation.y = rotate_toward(player_model.rotation.y,player_model_rotation_basis.rotation.y,charter_rotation_speed * delta)
 			
-			player_model.waist_rotation = rotate_toward(player_model.waist_rotation,0.0,10.0 * delta)
+			player_model.waist_rotation = rotate_toward(player_model.waist_rotation,0.0,charter_rotation_speed * delta)
 			
 			player_model.leg_estate = PlayerModel.LegEstate.FLOOR
 			player_model.arm_estate = PlayerModel.ArmEstate.NORMAL
@@ -129,7 +137,7 @@ func animation_process(delta: float) -> void:
 		player_model_rotation_basis.rotation.y += camera_suport.rotation.y + PI
 		player_model.rotation.y = player_model_rotation_basis.rotation.y
 		
-		player_model.waist_rotation = rotate_toward(player_model.waist_rotation,0.0,10.0 * delta)
+		player_model.waist_rotation = rotate_toward(player_model.waist_rotation,0.0,charter_rotation_speed * delta)
 		
 		player_model.leg_estate = PlayerModel.LegEstate.AIR
 		player_model.arm_estate = PlayerModel.ArmEstate.AIR
