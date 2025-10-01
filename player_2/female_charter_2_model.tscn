@@ -1,0 +1,288 @@
+[gd_scene load_steps=27 format=3 uid="uid://3ic2qqrugq3h"]
+
+[ext_resource type="PackedScene" uid="uid://dlr6sj6k6j0r" path="res://player_2/female_charter_2.glb" id="1_rnlh3"]
+[ext_resource type="Script" uid="uid://bwq7jj8jst2j2" path="res://player/player_model.gd" id="2_ntj3g"]
+[ext_resource type="Script" uid="uid://biw1br0nob8u0" path="res://player/bone_rotater.gd" id="3_rhit4"]
+[ext_resource type="AnimationLibrary" uid="uid://cffe0vkm2f8gi" path="res://player/template_psx_charter.glb" id="4_s3r10"]
+
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_4xcvv"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mstlb"]
+animation = &"template_psx_charter/charge_shot_arms_only"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ugfh7"]
+animation = &"template_psx_charter/automatic_shot_arms_only"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4xcvv"]
+animation = &"template_psx_charter/jump_legs_only"
+use_custom_timeline = true
+timeline_length = 1.0
+stretch_time_scale = true
+start_offset = 1.0
+loop_mode = 0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ldqqv"]
+animation = &"template_psx_charter/jump_arms_only"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_b6qoi"]
+animation = &"template_psx_charter/charge_shot_arms_only"
+use_custom_timeline = true
+timeline_length = 1.0
+stretch_time_scale = true
+start_offset = 1.0
+loop_mode = 0
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_ldqqv"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_oldwj"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_uex76"]
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_y220p"]
+xfade_time = 0.1
+input_0/name = "normal"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "gun"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+input_2/name = "air"
+input_2/auto_advance = false
+input_2/break_loop_at_end = false
+input_2/reset = true
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_yq1x2"]
+fadein_time = 0.1
+fadeout_time = 0.1
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_ivyc5"]
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_oldwj"]
+xfade_time = 0.1
+input_0/name = "floor"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "air"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_30u10"]
+animation = &"template_psx_charter/idle_arms_only"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2pfil"]
+animation = &"template_psx_charter/run_arms_only"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2cwkw"]
+animation = &"template_psx_charter/walk_arms_only"
+play_mode = 1
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_3ybyl"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_30u10")
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_2pfil")
+blend_point_1/pos = 1.0
+blend_point_2/node = SubResource("AnimationNodeAnimation_2cwkw")
+blend_point_2/pos = -1.0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2jlbv"]
+animation = &"template_psx_charter/idle_legs_only"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qq571"]
+animation = &"template_psx_charter/run_legs_only"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qvp1s"]
+animation = &"template_psx_charter/walk_legs_only"
+play_mode = 1
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_3gapg"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_2jlbv")
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_qq571")
+blend_point_1/pos = 1.0
+blend_point_2/node = SubResource("AnimationNodeAnimation_qvp1s")
+blend_point_2/pos = -1.0
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_rhit4"]
+graph_offset = Vector2(-856.1339, 247.27167)
+nodes/output/position = Vector2(1040, 420)
+nodes/Add2/node = SubResource("AnimationNodeAdd2_4xcvv")
+nodes/Add2/position = Vector2(320, 420)
+nodes/walk_arms/node = SubResource("AnimationNodeBlendSpace1D_3ybyl")
+nodes/walk_arms/position = Vector2(-840, 80)
+nodes/walk_legs/node = SubResource("AnimationNodeBlendSpace1D_3gapg")
+nodes/walk_legs/position = Vector2(-360, 640)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_uex76")
+nodes/TimeScale/position = Vector2(-660, 80)
+"nodes/TimeScale 2/node" = SubResource("AnimationNodeTimeScale_ldqqv")
+"nodes/TimeScale 2/position" = Vector2(-180, 640)
+nodes/arm_estate/node = SubResource("AnimationNodeTransition_y220p")
+nodes/arm_estate/position = Vector2(-253.19652, 273.07245)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_b6qoi")
+nodes/Animation/position = Vector2(-1740, 140)
+nodes/charged_shot/node = SubResource("AnimationNodeOneShot_ivyc5")
+nodes/charged_shot/position = Vector2(-1320, 200)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_mstlb")
+"nodes/Animation 2/position" = Vector2(-1740, 320)
+nodes/automatic_shot/node = SubResource("AnimationNodeOneShot_yq1x2")
+nodes/automatic_shot/position = Vector2(-1060, 300)
+"nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_ugfh7")
+"nodes/Animation 3/position" = Vector2(-1780, 580)
+"nodes/TimeScale 3/node" = SubResource("AnimationNodeTimeScale_oldwj")
+"nodes/TimeScale 3/position" = Vector2(-1320, 540)
+nodes/leg_estate/node = SubResource("AnimationNodeTransition_oldwj")
+nodes/leg_estate/position = Vector2(100, 740)
+"nodes/Animation 4/node" = SubResource("AnimationNodeAnimation_4xcvv")
+"nodes/Animation 4/position" = Vector2(-480, 880)
+"nodes/Animation 5/node" = SubResource("AnimationNodeAnimation_ldqqv")
+"nodes/Animation 5/position" = Vector2(-680, 460)
+node_connections = [&"output", 0, &"Add2", &"Add2", 0, &"arm_estate", &"Add2", 1, &"leg_estate", &"TimeScale", 0, &"walk_arms", &"TimeScale 2", 0, &"walk_legs", &"arm_estate", 0, &"TimeScale", &"arm_estate", 1, &"automatic_shot", &"arm_estate", 2, &"Animation 5", &"charged_shot", 0, &"Animation", &"charged_shot", 1, &"Animation 2", &"automatic_shot", 0, &"charged_shot", &"automatic_shot", 1, &"TimeScale 3", &"TimeScale 3", 0, &"Animation 3", &"leg_estate", 0, &"TimeScale 2", &"leg_estate", 1, &"Animation 4"]
+
+[node name="female_charter_2" node_paths=PackedStringArray("animation_tree", "waist", "arm") instance=ExtResource("1_rnlh3")]
+script = ExtResource("2_ntj3g")
+animation_tree = NodePath("metarig/GeneralSkeleton/AnimationTree")
+waist = NodePath("metarig/GeneralSkeleton/waist")
+arm = NodePath("metarig/GeneralSkeleton/arm")
+
+[node name="GeneralSkeleton" parent="metarig" index="0"]
+bones/0/position = Vector3(0, 0.65849394, -0.044159986)
+bones/0/rotation = Quaternion(2.9802322e-08, 0, 0, 1)
+bones/4/rotation = Quaternion(-3.3527613e-08, 0, 0, 1)
+bones/5/rotation = Quaternion(-2.9802322e-08, 0, 0, 1)
+bones/6/rotation = Quaternion(-7.450579e-09, -2.1316282e-14, -7.105428e-15, 1)
+bones/8/rotation = Quaternion(0.059934802, 0.74464375, -0.6630097, 0.048287887)
+bones/9/rotation = Quaternion(-0.06458091, -0.70364535, -0.04138974, 0.706399)
+bones/10/rotation = Quaternion(4.6566118e-10, 0.70710677, 4.6566118e-10, 0.70710677)
+bones/12/rotation = Quaternion(-0.059919693, 0.74464774, -0.66300756, -0.048273478)
+bones/13/rotation = Quaternion(-0.0645809, 0.70364535, 0.041389734, 0.706399)
+bones/14/rotation = Quaternion(-7.2177504e-09, -0.70710677, 7.2177504e-09, 0.70710677)
+bones/33/rotation = Quaternion(4.6718732e-08, -0.16277966, 0.9866625, -1.9296216e-08)
+bones/34/rotation = Quaternion(-4.751457e-16, 0.893845, -0.448376, -8.554946e-16)
+bones/35/rotation = Quaternion(4.6108655e-09, 0.7704345, -0.63751924, 4.5756945e-09)
+bones/38/rotation = Quaternion(3.53086e-08, 0.42443696, 0.9054575, 1.3601226e-09)
+bones/39/rotation = Quaternion(7.375019e-16, 0.935658, -0.35290816, 1.4794183e-16)
+bones/40/rotation = Quaternion(-1.0384679e-08, 0.83457637, -0.5508923, 7.626564e-09)
+
+[node name="spine_006" parent="metarig/GeneralSkeleton" index="0"]
+transform = Transform3D(1, 1.4210855e-14, -4.2632554e-14, -1.4210854e-14, 0.9999999, 8.1956365e-08, 4.2632564e-14, -8.195637e-08, 0.99999976, 4.893886e-15, 1.2654564, 0.01678136)
+
+[node name="spine_003" parent="metarig/GeneralSkeleton" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, -5.9604645e-08, 0, 5.9604645e-08, 1, 0, 1.0231339, -0.004719991)
+
+[node name="waist" type="SkeletonModifier3D" parent="metarig/GeneralSkeleton" index="4"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+rotation_edit_mode = 0
+rotation_order = 2
+top_level = false
+visible = true
+visibility_parent = NodePath("")
+active = true
+influence = 1.0
+script = ExtResource("3_rhit4")
+target_bone = "Spine"
+metadata/_custom_type_script = "uid://biw1br0nob8u0"
+
+[node name="arm" type="SkeletonModifier3D" parent="metarig/GeneralSkeleton" index="5"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+rotation_edit_mode = 0
+rotation_order = 2
+top_level = false
+visible = true
+visibility_parent = NodePath("")
+active = true
+influence = 1.0
+script = ExtResource("3_rhit4")
+target_bone = "RightUpperArm"
+target_rotation_pivo = Vector3(0, 0, 1)
+metadata/_custom_type_script = "uid://biw1br0nob8u0"
+
+[node name="wire2" type="SpringBoneSimulator3D" parent="metarig/GeneralSkeleton" index="6"]
+setting_count = 2
+settings/0/root_bone_name = "wire.L.001"
+settings/0/root_bone = 18
+settings/0/end_bone_name = "wire.L.006"
+settings/0/end_bone = 23
+settings/0/extend_end_bone = false
+settings/0/center_from = 0
+settings/0/individual_config = false
+settings/0/rotation_axis = 3
+settings/0/radius/value = 0.02
+settings/0/radius/damping_curve = null
+settings/0/stiffness/value = 1.0
+settings/0/stiffness/damping_curve = null
+settings/0/drag/value = 0.4
+settings/0/drag/damping_curve = null
+settings/0/gravity/value = 0.0
+settings/0/gravity/damping_curve = null
+settings/0/gravity/direction = Vector3(0, -1, 0)
+settings/0/enable_all_child_collisions = true
+settings/0/exclude_collision_count = 0
+settings/1/root_bone_name = "wire.R.001"
+settings/1/root_bone = 25
+settings/1/end_bone_name = "wire.R.006"
+settings/1/end_bone = 30
+settings/1/extend_end_bone = false
+settings/1/center_from = 0
+settings/1/individual_config = false
+settings/1/rotation_axis = 3
+settings/1/radius/value = 0.02
+settings/1/radius/damping_curve = null
+settings/1/stiffness/value = 1.0
+settings/1/stiffness/damping_curve = null
+settings/1/drag/value = 0.4
+settings/1/drag/damping_curve = null
+settings/1/gravity/value = 0.0
+settings/1/gravity/damping_curve = null
+settings/1/gravity/direction = Vector3(0, -1, 0)
+settings/1/enable_all_child_collisions = true
+settings/1/exclude_collision_count = 0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="metarig/GeneralSkeleton" index="7"]
+root_node = NodePath("../../..")
+libraries = {
+&"template_psx_charter": ExtResource("4_s3r10")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="metarig/GeneralSkeleton" index="8"]
+root_node = NodePath("%GeneralSkeleton/../..")
+tree_root = SubResource("AnimationNodeBlendTree_rhit4")
+anim_player = NodePath("../AnimationPlayer")
+parameters/Add2/add_amount = 1.0
+parameters/walk_arms/blend_position = 0.0
+parameters/walk_legs/blend_position = 1.0
+parameters/TimeScale/scale = 2.0
+"parameters/TimeScale 2/scale" = 2.0
+parameters/arm_estate/current_state = "normal"
+parameters/arm_estate/transition_request = ""
+parameters/arm_estate/current_index = 0
+parameters/charged_shot/active = false
+parameters/charged_shot/internal_active = false
+parameters/charged_shot/request = 0
+parameters/automatic_shot/active = false
+parameters/automatic_shot/internal_active = false
+parameters/automatic_shot/request = 0
+"parameters/TimeScale 3/scale" = 2.0
+parameters/leg_estate/current_state = "floor"
+parameters/leg_estate/transition_request = ""
+parameters/leg_estate/current_index = 0

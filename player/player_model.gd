@@ -2,9 +2,9 @@
 extends Node3D
 class_name PlayerModel
 
-@onready var animation_tree : AnimationTree = $metarig/GeneralSkeleton/AnimationTree
-@onready var waist : BoneRotator = $metarig/GeneralSkeleton/waist
-@onready var arm : BoneRotator = $metarig/GeneralSkeleton/arm
+@export var animation_tree : AnimationTree
+@export var waist : BoneRotator
+@export var arm : BoneRotator
 
 @export_range(-1.0,1.0) var walk : float = 0.0 : 
 	set(value):

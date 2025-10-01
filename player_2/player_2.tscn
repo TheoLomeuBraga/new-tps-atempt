@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dqcg0otwem6xk"]
 
-[ext_resource type="PackedScene" uid="uid://bu0u51ro1uyfx" path="res://player/player_model.tscn" id="1_jd233"]
 [ext_resource type="Script" uid="uid://bqdb86brrtdf2" path="res://player_2/player_2.gd" id="1_vwtb1"]
+[ext_resource type="PackedScene" uid="uid://3ic2qqrugq3h" path="res://player_2/female_charter_2_model.tscn" id="2_vwtb1"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vwtb1"]
 radius = 0.18
@@ -14,8 +14,8 @@ script = ExtResource("1_vwtb1")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.123168945, 0)
 shape = SubResource("CapsuleShape3D_vwtb1")
 
-[node name="demo_model" parent="." instance=ExtResource("1_jd233")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -1.0229944, 0)
+[node name="demo_model" parent="." instance=ExtResource("2_vwtb1")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -0.97526133, 0)
 
 [node name="camera_suport" type="Node3D" parent="."]
 top_level = true

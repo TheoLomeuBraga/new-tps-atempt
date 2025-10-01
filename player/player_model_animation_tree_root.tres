@@ -1,0 +1,136 @@
+[gd_resource type="AnimationNodeBlendTree" load_steps=22 format=3 uid="uid://b8u0yktcveet1"]
+
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_4xcvv"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mstlb"]
+animation = &"template_psx_charter/charge_shot_arms_only"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ugfh7"]
+animation = &"template_psx_charter/automatic_shot_arms_only"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4xcvv"]
+animation = &"template_psx_charter/jump_legs_only"
+use_custom_timeline = true
+timeline_length = 1.0
+stretch_time_scale = true
+start_offset = 1.0
+loop_mode = 0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ldqqv"]
+animation = &"template_psx_charter/jump_arms_only"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_b6qoi"]
+animation = &"template_psx_charter/charge_shot_arms_only"
+use_custom_timeline = true
+timeline_length = 1.0
+stretch_time_scale = true
+start_offset = 1.0
+loop_mode = 0
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_ldqqv"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_oldwj"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_uex76"]
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_y220p"]
+xfade_time = 0.1
+input_0/name = "normal"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "gun"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+input_2/name = "air"
+input_2/auto_advance = false
+input_2/break_loop_at_end = false
+input_2/reset = true
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_yq1x2"]
+fadein_time = 0.1
+fadeout_time = 0.1
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_ivyc5"]
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_oldwj"]
+xfade_time = 0.1
+input_0/name = "floor"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "air"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_30u10"]
+animation = &"template_psx_charter/idle_arms_only"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2pfil"]
+animation = &"template_psx_charter/run_arms_only"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2cwkw"]
+animation = &"template_psx_charter/walk_arms_only"
+play_mode = 1
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_3ybyl"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_30u10")
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_2pfil")
+blend_point_1/pos = 1.0
+blend_point_2/node = SubResource("AnimationNodeAnimation_2cwkw")
+blend_point_2/pos = -1.0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2jlbv"]
+animation = &"template_psx_charter/idle_legs_only"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qq571"]
+animation = &"template_psx_charter/run_legs_only"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qvp1s"]
+animation = &"template_psx_charter/walk_legs_only"
+play_mode = 1
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_3gapg"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_2jlbv")
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_qq571")
+blend_point_1/pos = 1.0
+blend_point_2/node = SubResource("AnimationNodeAnimation_qvp1s")
+blend_point_2/pos = -1.0
+
+[resource]
+nodes/output/position = Vector2(1040, 420)
+nodes/Add2/node = SubResource("AnimationNodeAdd2_4xcvv")
+nodes/Add2/position = Vector2(320, 420)
+nodes/walk_arms/node = SubResource("AnimationNodeBlendSpace1D_3ybyl")
+nodes/walk_arms/position = Vector2(-840, 80)
+nodes/walk_legs/node = SubResource("AnimationNodeBlendSpace1D_3gapg")
+nodes/walk_legs/position = Vector2(-360, 640)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_uex76")
+nodes/TimeScale/position = Vector2(-660, 80)
+"nodes/TimeScale 2/node" = SubResource("AnimationNodeTimeScale_ldqqv")
+"nodes/TimeScale 2/position" = Vector2(-180, 640)
+nodes/arm_estate/node = SubResource("AnimationNodeTransition_y220p")
+nodes/arm_estate/position = Vector2(-253.19652, 273.07245)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_b6qoi")
+nodes/Animation/position = Vector2(-1740, 140)
+nodes/charged_shot/node = SubResource("AnimationNodeOneShot_ivyc5")
+nodes/charged_shot/position = Vector2(-1320, 200)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_mstlb")
+"nodes/Animation 2/position" = Vector2(-1740, 320)
+nodes/automatic_shot/node = SubResource("AnimationNodeOneShot_yq1x2")
+nodes/automatic_shot/position = Vector2(-1060, 300)
+"nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_ugfh7")
+"nodes/Animation 3/position" = Vector2(-1780, 580)
+"nodes/TimeScale 3/node" = SubResource("AnimationNodeTimeScale_oldwj")
+"nodes/TimeScale 3/position" = Vector2(-1320, 540)
+nodes/leg_estate/node = SubResource("AnimationNodeTransition_oldwj")
+nodes/leg_estate/position = Vector2(100, 740)
+"nodes/Animation 4/node" = SubResource("AnimationNodeAnimation_4xcvv")
+"nodes/Animation 4/position" = Vector2(-480, 880)
+"nodes/Animation 5/node" = SubResource("AnimationNodeAnimation_ldqqv")
+"nodes/Animation 5/position" = Vector2(-680, 460)
+node_connections = [&"output", 0, &"Add2", &"Add2", 0, &"arm_estate", &"Add2", 1, &"leg_estate", &"TimeScale", 0, &"walk_arms", &"TimeScale 2", 0, &"walk_legs", &"arm_estate", 0, &"TimeScale", &"arm_estate", 1, &"automatic_shot", &"arm_estate", 2, &"Animation 5", &"charged_shot", 0, &"Animation", &"charged_shot", 1, &"Animation 2", &"automatic_shot", 0, &"charged_shot", &"automatic_shot", 1, &"TimeScale 3", &"TimeScale 3", 0, &"Animation 3", &"leg_estate", 0, &"TimeScale 2", &"leg_estate", 1, &"Animation 4"]
