@@ -10,6 +10,8 @@ func _ready() -> void:
 	add_child(player_model_rotation_basis)
 	
 	player_model.rotation.y = player_model_rotation_basis.rotation.y + PI
+	
+	
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
@@ -59,6 +61,7 @@ var shot_recently : float = 0.0
 var input_dir_on_jump : Vector2 = Vector2.ZERO
 
 const charter_rotation_speed : float = 10.0
+var reverse_player_model_rotation_y : float = 0.0
 
 func animation_process(delta: float) -> void:
 	
@@ -88,12 +91,25 @@ func animation_process(delta: float) -> void:
 				player_model_rotation_basis.rotation.y += camera_suport.rotation.y + PI
 				
 				player_model.rotation.y = rotate_toward(player_model.rotation.y,player_model_rotation_basis.rotation.y,charter_rotation_speed * delta)
+				reverse_player_model_rotation_y = player_model.rotation.y + PI 
 				
-				if player_model.rotation.y < player_model.rotation.y-(PI/2.0):
-					player_model.rotation.y = - player_model.rotation.y
 				
-				if player_model.rotation.y > player_model.rotation.y+(PI/2.0): 
-					player_model.rotation.y = - player_model.rotation.y
+				'''
+				print(player_model.rotation.y," ",camera_suport.rotation.y-(PI/2.0)," ",camera_suport.rotation.y+(PI/2.0))
+				if player_model.rotation.y < camera_suport.rotation.y-(PI/2.0):
+					print("A")
+					player_model.rotation.y = camera_suport.rotation.y-(PI/2.0)+0.1
+				
+				if player_model.rotation.y > camera_suport.rotation.y+(PI/2.0): 
+					print("B")
+					player_model.rotation.y = camera_suport.rotation.y+(PI/2.0)-0.1
+				'''
+				
+				var angle_dif : float = wrapf(reverse_player_model_rotation_y, PI, -PI)
+				var max_dif : float = wrapf(camera_suport.rotation.y + (PI / 2.0), PI, -PI)
+				var min_dif : float = wrapf(camera_suport.rotation.y - (PI / 2.0), PI, -PI)
+				player_model.rotation.y = clamp(angle_dif,max_dif,min_dif) - PI
+				
 				
 				
 				player_model_rotation_basis.look_at(player_model_rotation_basis.global_position + camera_suport.transform.basis.z)
