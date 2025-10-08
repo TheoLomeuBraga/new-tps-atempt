@@ -39,3 +39,4 @@ material = SubResource("StandardMaterial3D_0gq0q")
 
 [node name="Player2" parent="." instance=ExtResource("3_a27dc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2, -1)
+speed = 4.0
